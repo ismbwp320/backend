@@ -1,15 +1,11 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import router from '@routes/index';
+import connectDB from '@config/db';
 import { PORT } from '@config/index';
-const app = express()
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
-})
-
-app.get('/about', (req, res) => {
-  res.send('About Page!')
-})
-
+const app = express();
+connectDB();
+app.use(express.json());
+app.use('/api/v1/users', router);
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 })
